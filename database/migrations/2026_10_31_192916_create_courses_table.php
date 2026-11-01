@@ -15,6 +15,10 @@ return new class extends Migration
             $table->string('course_code')->unique();
             $table->unsignedInteger('capacity')->default(35);
 
+            $table->foreignUuid('lecturer_id')
+                ->constrained('users')
+                ->cascadeOnUpdate();
+
             $table->unsignedTinyInteger('credit_hour');    
             
             $table->string('prerequisit');
