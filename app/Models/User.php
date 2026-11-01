@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -23,7 +23,9 @@ class User extends Authenticatable
         'name', 
         'email', 
         'password', 
-        'phone_number'
+        'phone_number',
+        'department_id',
+        'year_of_study',
     ];
     
     protected $guarded = ['role', 'password', 'remember_token'];
@@ -49,7 +51,7 @@ class User extends Authenticatable
     }
 
     public function enrollments():HasMany{
-        return $this->hasMany(Enrollment::class);
+        return $this->hasMany(Enrollment::class, 'student_id');
     }
 
     public function courses() :BelongsToMany
@@ -69,5 +71,9 @@ class User extends Authenticatable
             'lecturer_id',
             'course_section_id'
         )->withTimestamps();
+    }
+
+    public function department(): BelongsTo {
+        return $this->belongsTo(Department::class);
     }
 }
