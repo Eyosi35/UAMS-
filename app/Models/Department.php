@@ -16,8 +16,7 @@ class Department extends Model
         'department_code',
     ];
 
-    public function students(): HasMany
-    {
+    public function students(): HasMany{
         return $this->hasMany(User::class, 'department_id')
             ->where('role', 'student');
     }

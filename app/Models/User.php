@@ -5,6 +5,7 @@ namespace App\Models;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -17,7 +18,7 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
-    use HasFactory, Notifiable, HasApiTokens;
+    use HasFactory, Notifiable, HasApiTokens, HasUuids;
 
     protected $fillable = [
         'name', 
@@ -39,15 +40,15 @@ class User extends Authenticatable
     }
 
     public function isAdmin(){
-        return $this->role == 'admin';
+        return $this->role === 'admin';
     }
 
     public function isLecturer(){
-        $this->role == 'lecturer';
+        $this->role === 'lecturer';
     }
 
     public function isStudent(){
-        $this->role == 'student';
+        $this->role === 'student';
     }
 
     public function enrollments():HasMany{

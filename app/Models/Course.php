@@ -14,6 +14,8 @@ class Course extends Model
     /** @use HasFactory<\Database\Factories\CourseFactory> */
     use HasFactory, HasUuids;
 
+    public $timestamps = false;
+
     protected $fillable = [
         'course_title',
         'course_code',

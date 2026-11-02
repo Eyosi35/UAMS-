@@ -17,15 +17,15 @@ class CourseSection extends Model
         'course_offering_id',
         'section_name',
         'capacity',
+        'department_id',
+        'year_of_study',
     ];
 
-    public function courseOffering(): BelongsTo
-    {
+    public function courseOffering(): BelongsTo{
         return $this->belongsTo(CourseOffering::class);
     }
 
-    public function lecturers(): BelongsToMany
-    {
+    public function lecturers(): BelongsToMany{
         return $this->belongsToMany(
             User::class,
             'course_section_lecturer',
@@ -34,8 +34,7 @@ class CourseSection extends Model
         )->withTimestamps();
     }
 
-    public function enrollments(): HasMany
-    {
+    public function enrollments(): HasMany{
         return $this->hasMany(Enrollment::class);
     }
 }

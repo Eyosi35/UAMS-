@@ -4,23 +4,29 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Enrollment extends Model
 {
-    use HasFactory, HasUuids;
+    use HasUuids;
+
+    protected $primaryKey = 'uuid';
+
+    public $incrementing = false;
+
+    protected $keyType = 'string';
 
     protected $fillable = [
         'student_id',
         'course_section_id',
     ];
 
-    public function student(): BelongsTo{
+    public function student()
+    {
         return $this->belongsTo(User::class, 'student_id');
     }
 
-    public function courseSection(): BelongsTo{
-        return $this->belongsTo(CourseSection::class);
+    public function courseSection()
+    {
+        return $this->belongsTo(CourseSection::class, 'course_section_id');
     }
 }
