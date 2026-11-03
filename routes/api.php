@@ -10,8 +10,11 @@ Route::post('/register', [RegisterController::class, 'register']);
 Route::post('/login', [LoginController::class, 'login']);
 
 Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/user', function (Request $request) {
+        return $request->user();
+    });
+
     Route::post('/logout', [LoginController::class, 'logout']);
 
-    Route::post('/admin/enrollments', [EnrollmentController::class,'store',
-    ]);
+    Route::post('/admin/enrollments', [EnrollmentController::class, 'store']);
 });
