@@ -30,18 +30,15 @@ class CourseOffering extends Model
         ];
     }
 
-    public function course(): BelongsTo
-    {
+    public function course(): BelongsTo{
         return $this->belongsTo(Course::class);
     }
 
-    public function semester(): BelongsTo
-    {
+    public function semester(): BelongsTo{
         return $this->belongsTo(Semester::class);
     }
 
-    public function lecturers(): BelongsToMany
-    {
+    public function lecturers(): BelongsToMany{
         return $this->belongsToMany(
             User::class,
             'course_offering_lecturer',
@@ -50,8 +47,7 @@ class CourseOffering extends Model
         )->withTimestamps();
     }
 
-    public function enrollments(): HasMany
-    {
+    public function enrollments(): HasMany{
         return $this->hasMany(Enrollment::class);
     }
 }

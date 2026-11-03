@@ -42,5 +42,4 @@ return new class extends Migration
             $table->unique(['student_id', 'course_id']);
         });
     }
-
 };

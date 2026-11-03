@@ -25,8 +25,7 @@ class Enrollment extends Model
         return $this->belongsTo(User::class, 'student_id');
     }
 
-    public function courseSection()
-    {
+    public function courseSection(){
         return $this->belongsTo(CourseSection::class, 'course_section_id');
     }
 }

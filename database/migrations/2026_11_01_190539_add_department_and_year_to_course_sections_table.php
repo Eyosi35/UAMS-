@@ -21,10 +21,7 @@ return new class extends Migration
             $table->unsignedTinyInteger('year_of_study');
 
            
-            $table->dropUnique([
-                'course_offering_id',
-                'section_name'
-            ]);
+            $table->dropUnique(['course_offering_id','section_name']);
 
             $table->unique([
                 'course_offering_id',

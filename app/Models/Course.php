@@ -23,13 +23,11 @@ class Course extends Model
         'prerequisit'
     ];
 
-    public function enrollments() :HasMany
-    {
+    public function enrollments() :HasMany{
         return $this->hasMany(Enrollment::class);
     }
 
-    public function lecturers(): BelongsToMany
-    {
+    public function lecturers(): BelongsToMany{
         return $this->belongsToMany(
             User::class,
             'course_lecturer',

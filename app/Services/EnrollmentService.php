@@ -16,8 +16,8 @@ class EnrollmentService
         array $studentIds
     ): array {
         return DB::transaction(function () use ($section, $studentIds) {
-            // Lock the section to prevent concurrent capacity overbooking.
-            $section = CourseSection::query()
+
+        $section = CourseSection::query()
                 ->whereKey($section->id)
                 ->lockForUpdate()
                 ->firstOrFail();

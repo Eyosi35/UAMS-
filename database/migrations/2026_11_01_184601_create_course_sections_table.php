@@ -23,10 +23,7 @@ return new class extends Migration
 
         $table->unsignedInteger('capacity')->default(35);
 
-        $table->unique([
-            'course_offering_id',
-            'section_name'
-        ]);
+        $table->unique(['course_offering_id','section_name']);
 
         $table->timestamps();
     });

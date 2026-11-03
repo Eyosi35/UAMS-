@@ -29,10 +29,9 @@ class User extends Authenticatable
         'year_of_study',
     ];
     
-    protected $guarded = ['role', 'password', 'remember_token'];
+    protected $guarded = ['role', 'remember_token'];
    
-    protected function casts(): array
-    {
+    protected function casts(): array{
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
@@ -44,11 +43,11 @@ class User extends Authenticatable
     }
 
     public function isLecturer(){
-        $this->role === 'lecturer';
+        return $this->role === 'lecturer';
     }
 
     public function isStudent(){
-        $this->role === 'student';
+        return $this->role === 'student';
     }
 
     public function enrollments():HasMany{
