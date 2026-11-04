@@ -19,12 +19,12 @@ Route::middleware('auth:sanctum')->group(function () {
 
 Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
     Route::post('/admin/enrollments', [EnrollmentController::class, 'store']);
+    Route::get('/admin/enrollments', [EnrollmentController::class, 'index']);
+    Route::delete('/admin/enrollments/{uuid}', [EnrollmentController::class, 'destroy']);
 });
 
 Route::middleware(['auth:sanctum', 'role:lecturer'])->group(function () {
-    // Lecturer routes will go here.
 });
 
 Route::middleware(['auth:sanctum', 'role:student'])->group(function () {
-    // Student routes will go here.
 });
