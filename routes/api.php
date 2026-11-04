@@ -15,6 +15,16 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
     Route::post('/logout', [LoginController::class, 'logout']);
+});
 
+Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
     Route::post('/admin/enrollments', [EnrollmentController::class, 'store']);
+});
+
+Route::middleware(['auth:sanctum', 'role:lecturer'])->group(function () {
+    // Lecturer routes will go here.
+});
+
+Route::middleware(['auth:sanctum', 'role:student'])->group(function () {
+    // Student routes will go here.
 });

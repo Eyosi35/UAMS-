@@ -139,4 +139,37 @@ class AuthTest extends TestCase
             ->getJson('/api/user')
             ->assertUnauthorized();
     }
+
+        public function test_student_cannot_access_admin_enrollment_endpoint(): void
+    {
+        $student = User::factory()->create([
+            'role' => 'student',
+        ]);
+
+        $this->actingAs($student, 'sanctum')
+            ->postJson('/api/admin/enrollments')
+            ->assertForbidden();
+    }
+
+    public function test_lecturer_cannot_access_admin_enrollment_endpoint(): void
+    {
+        $lecturer = User::factory()->create([
+            'role' => 'lecturer',
+        ]);
+
+        $this->actingAs($lecturer, 'sanctum')
+            ->postJson('/api/admin/enrollments')
+            ->assertForbidden();
+    }
+
+    public function test_admin_can_access_admin_enrollment_endpoint(): void
+    {
+        $admin = User::factory()->create([
+            'role' => 'admin',
+        ]);
+
+        $this->actingAs($admin, 'sanctum')
+            ->postJson('/api/admin/enrollments')
+            ->assertUnprocessable();
+    }
 }
