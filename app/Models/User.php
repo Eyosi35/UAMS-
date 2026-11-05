@@ -76,4 +76,15 @@ class User extends Authenticatable
     public function department(): BelongsTo {
         return $this->belongsTo(Department::class);
     }
+
+    public function courseSections(): BelongsToMany{
+        return $this->belongsToMany(
+            CourseSection::class,
+            'enrollments',
+            'student_id',
+            'course_section_id',
+            'id',
+            'id'
+        )->withTimestamps();
+    }
 }
